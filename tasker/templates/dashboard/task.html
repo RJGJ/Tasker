@@ -9,8 +9,8 @@
 
 {% block styles %}
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/task.css' %}">
-<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
 {% endblock styles %}
 
@@ -20,86 +20,174 @@
 
 {% include 'header.html' %}
 
-<div class="cont">
-    <form action="" method="POST"> 
-        {% csrf_token %}
+<div class="container">
+    <div class="card rounded p-3 my-3">
+        <form action="" method="POST" class="card-body">
 
-        <p style="color:red;">{{ error }}</p>
+            {% csrf_token %}
 
-        <h4>
-            Title: 
-            <input 
-                type="text" 
-                placeholder="{{ task.name }}" 
-                id="name" 
-                name="name" 
+            {% if error %}
+                <p class="alert alert-danger">
+                    {{ error }}
+                </p>
+            {% endif %}
+
+            <label for="name" class="form-label">
+                <h5>Title: </h5>
+            </label>
+
+            <input
+                class="form-control"
+                type="text"
+                placeholder="{{ task.name }}"
+                id="name"
+                name="name"
                 value="{{ task.name }}"
+                {% if not is_admin %}
+                    disabled
+                {% endif %}
             >
-        </h4>
 
-        <p>Created on: {{ task.created_on }}</p>
+            <label class="form-label" for="created-on">Created on:</label>
+            <input 
+                class="form-control" 
+                type="text" 
+                name="created-on" 
+                id="created-on"
+                placeholder="{{ task.created_on }}"
+                disabled
+            >
 
-        <label for="due">Due on:</label>
-        <input type="date" name="due" id="due">
-        <br>
+            <label class="form-label" for="due">Due on:</label>
+            <input
+                class="form-control"
+                type="date"
+                name="due"
+                id="due"
+                {% if not is_admin %}
+                    disabled
+                {% endif %}
+            >
 
-        <label for="desc">Description:</label>
-        <textarea type="text" name="desc" id="desc">{{ task.description }}</textarea>
-
-        <p>Goals:</p>
-        <div id="goals-container">
-            {% comment %} goals here {% endcomment %}
-            {% for goal in goals %}
-                <div class="goal-container">
-
-                    {% if goal.done %}
-                        <input
-                            type="checkbox" 
-                            onchange="goalChanged('goal-{{ goal.id }}')"
-                            checked
-                        >
-                        <input 
-                            type="hidden" 
-                            name="goal-{{ goal }}"
-                            value="goal-True-{{ goal }}"
-                            id="goal-{{ goal.id }}"
-                            class="goal"
-                        >
-                    {% else %}
-                        <input
-                            type="checkbox" 
-                            onchange="goalChanged('goal-{{ goal.id }}')"
-                        >
-                        <input 
-                            type="hidden" 
-                            name="goal-{{ goal }}"
-                            value="goal-False-{{ goal }}"
-                            id="goal-{{ goal.id }}"
-                            class="goal"
-                        >
+            <div class="form-group">
+                <label class="form-label" for="desc">Description:</label>
+                <textarea
+                    class="form-control"
+                    type="text"
+                    name="desc"
+                    id="desc"
+                    {% if not is_admin %}
+                        disabled
                     {% endif %}
+                >
+                    {{ task.description }}
+                </textarea>
+            </div>
 
-                    <label for="goal-{{ goal }}">
-                        {{ goal }}
-                    </label>
+            <hr/>
 
-                    <a href="{% url 'delete_goal' goal.id %}">
-                        <span>
-                            {% include './delete_icon.html' %}
-                        </span>
-                    </a>
-                    
-                </div>
-            {% endfor %}
-        </div>
-        <input type="text" name="goal" id="goal" placeholder="add new goal..." form="add-goal-frm">
-        <input type="button" value="Add goal" id="add-goal-btn">
-        <br>
+            <h5 class="card-title">Goals:</h5>
+            <div id="list-group">
+                {% for goal in goals %}
 
-        <input type="button" value="Revert Changes" onClick="location.reload(true);">
-        <input style="background-color:red; color: white;" type="submit" name="option" value="Delete task">
-        <input type="submit" name="option" value="Save">
-    </form>
+                    <div class="dropdown">
+                        <button
+                            {% if goal.done %}
+                                class="list-group-item list-group-item-success list-group-item-action dropdown-toggle" 
+                                type="button" 
+                            {% else %}
+                                class="list-group-item list-group-item-danger list-group-item-action dropdown-toggle" 
+                                type="button" 
+                            {% endif %}
+                            id="dropdownMenuButton1{{ goal.id }}" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false" 
+                        >
+                            {{ goal }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1{{ goal.id }}">
+                            {% if not goal.done %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'create_submition' task.id %}">
+                                        Make a submition
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <li>
+                                    <a 
+                                        class="dropdown-item" 
+                                        href="{% url 'goal_form' goal.id %}"
+                                    >
+                                        Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a 
+                                        class="dropdown-item" 
+                                        href="{% url 'delete_goal' goal.id %}"
+                                    >
+                                        Delete
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+            {% if user.is_superuser %}
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    name="goal" 
+                    id="goal" 
+                    placeholder="add new goal..." 
+                    form="add-goal-frm"
+                >
+                <input 
+                    class="btn btn-primary rounded" 
+                    type="button" 
+                    value="Add goal" 
+                    id="add-goal-btn"
+                    onClick="
+                        let title = $('#goal').val();
+                        if (!!title) {
+                            window.location.replace(`/new-goal/{{ task.id }}/${title}`);
+                        }"
+                >
+                
+                <hr>
+
+                <input
+                    class="btn rounded btn-warning"
+                    type="button"
+                    value="Revert Changes"
+                    onClick="location.reload(true);"
+                >
+                <input
+                    class="btn rounded btn-danger" 
+                    type="submit" 
+                    name="option" 
+                    value="Delete task"
+                >
+                <input
+                    class="btn rounded btn-primary" 
+                    type="submit" 
+                    name="option" 
+                    value="Save"
+                >
+            {% endif %}
+
+        </form>
+    </div>
+
+    <hr/>
+
+    <!-- Submitions for tasks -->
+    {% include 'dashboard/submitions.html' %}
+
 </div>
 
 {% endblock content %}
@@ -108,6 +196,7 @@
 
 {% block scripts %}
 
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 <script src="{% static 'js/task.js' %}"></script>
 
 {% endblock scripts %}

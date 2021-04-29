@@ -11,7 +11,8 @@ class User(AbstractUser):
     image = models.ImageField(null=True, default=None, blank=True)
 
     def save(self, *args, **kwargs):
-        self._process_img()
+        if bool(self.image) == True:
+            self._process_img()
         
         super().save(*args, **kwargs)
 
@@ -62,7 +63,25 @@ class TaskItem(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, null=True, blank=True)
     done = models.BooleanField(null=False, default=False)
-    task = models.ManyToManyField(Task)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
         return self.name
+
+
+class Submition(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    pub_date = models.DateTimeField(auto_now=True, null=False)
+    title = models.CharField(max_length=254, null=False)
+    description = models.CharField(max_length=254, null=True)
+    approved = models.BooleanField(default=False)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
+    goal = models.ForeignKey(TaskItem, on_delete=models.CASCADE, default=None, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class SubmitionFile(models.Model):
+    file = models.FileField()
+    submition_parent = models.ForeignKey(Submition, on_delete=models.CASCADE, default=None)

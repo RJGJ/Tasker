@@ -1,0 +1,54 @@
+<!-- Submitions for tasks -->
+{% if submitions %}
+    {% for submition in submitions %}
+        <div class="container-fluid">
+            <div class="card rounded p-3 mx-auto">
+                {% if submition.approved %}
+                    <p class="alert alert-success">Approved</p>
+                {% endif %}
+                <form class="card-body">
+                    <div class="row">
+                        <img class="profile-pic col-1 rounded-circle" src="{{ user.image.url }}">
+                        <div class="col p-3">
+                            {% if user.last_name and user.first_name %}
+                                <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                            {% else %}
+                                <h5 class="card-title">{{ user }}</h5>
+                            {% endif %}
+                            <p class="card-text text-muted">Creation Date: {{ submition.pub_date }} | Submition ID: {{ submition.id }}</p>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h5 class="card-title">
+                        <strong>{{ submition }}</strong> 
+                        for
+                        <strong>{{ submition.goal }}</strong>
+                    </h5>
+                    <p class="card-text">{{ submition.description }}</p>
+                    {% comment %} <ul>
+                        <li>file 1</li>
+                        <li>file 2</li>
+                        <li>file 3</li>
+                    </ul> {% endcomment %}
+                    {% if not submition.approved %}
+                        {% if user.is_superuser %}
+                            {% comment %} <a href="#" class="col mx-2 btn rounded btn-danger">Deny</a> {% endcomment %}
+                            <a href="{% url 'accept_submition' task.id submition.id %}" class="col mx-2 btn rounded btn-primary">Approve</a>
+                        {% endif %}
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% comment %} <div class="container-fluid m-3">
+    <a 
+        class="btn btn-primary rounded"
+        href="{% url 'create_submition' task.id %}"
+    >
+        Create Submition Request
+    </a>
+</div> {% endcomment %}
+
+<hr/>
