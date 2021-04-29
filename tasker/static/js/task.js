@@ -1,16 +1,16 @@
-$(document).ready(function () {
+// $(document).ready(function () {
     
-    $('#add-goal-btn').click((e) => {
+//     $('#add-goal-btn').click((e) => {
 
-        if(!hasDuplicateGoal($('#goal').val().trim())){
-            addGoal( $('#goal').val().trim() );
-            $('#goal').val('');
-        } else {
-            alert('There is already a goal with the same name');
-        }
-    });
+//         if(!hasDuplicateGoal($('#goal').val().trim())){
+//             addGoal( $('#goal').val().trim() );
+//             $('#goal').val('');
+//         } else {
+//             alert('There is already a goal with the same name');
+//         }
+//     });
 
-});
+// });
 
 
 /**

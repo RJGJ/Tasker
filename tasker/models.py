@@ -63,7 +63,7 @@ class TaskItem(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, null=True, blank=True)
     done = models.BooleanField(null=False, default=False)
-    task = models.ManyToManyField(Task)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
         return self.name

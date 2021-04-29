@@ -11,4 +11,7 @@ urlpatterns = [
     path('delete-goal/<int:id>/', delete_goal, name='delete_goal'),
     path('delete-task/<int:id>/', delete_task, name='delete_task'),
     path('create-submition/task/<int:task_id>/', create_submition, name='create_submition'),
+    path('goal-form/<int:id>/', goal_form, name='goal_form'),
+    path('new-goal/<int:task_id>/<str:title>', new_goal, name='new-goal'),
+    path('accept-submition/<int:task_id>/<int:submition_id>/', accept_submition, name='accept_submition'),
 ]

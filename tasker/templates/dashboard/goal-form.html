@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit {{ goal }}{% endblock title %}
+
+{% block content %}
+
+{% include 'header.html' %}
+
+
+<div class="container">
+    <div class="card rounded p-3 my-3">
+        <div class="card-body">
+            {{ form.as_p }}
+            <button class="btn rounded btn-danger">Cancel</button>
+            <input class="btn rounded btn-primary" type="submit" value="Save">
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+        $('input[type="text"]').addClass('form-control');
+    </script>
+{% endblock scripts %}

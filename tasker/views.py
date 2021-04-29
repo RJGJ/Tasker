@@ -223,3 +223,49 @@ def create_submition(request, task_id):
     }
 
     return render(request, 'dashboard/create-submition.html', context)
+
+
+@login_required
+def goal_form(request, id):
+    goal = TaskItem.objects.get(id=id)
+    form = GoalForm(instance=goal)
+    errors = None
+
+    if request.method == 'POST':
+        if form.is_valid:
+            form.save()
+            return render(request, 'dashboard/goal-form.html', context)
+        
+        else:
+            errors = form.errors
+
+    context = {
+        'errors': errors,
+        'form': form,
+    }
+
+    return render(request, 'dashboard/goal-form.html', context)
+
+
+@login_required
+def new_goal(request, task_id, title):
+
+    new_goal_obj = TaskItem(name=title)
+    new_goal_obj.task = Task.objects.get(id=task_id)
+    new_goal_obj.save()
+
+    return redirect(task, task_id)
+
+
+@login_required
+def accept_submition(request, task_id, submition_id):
+
+    submition_obj = Submition.objects.get(id=submition_id)
+    submition_obj.approved = True
+    submition_obj.save()
+
+    goal_obj = submition_obj.goal
+    goal_obj.done = True
+    goal_obj.save()
+
+    return redirect(task, task_id)

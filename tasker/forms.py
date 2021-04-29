@@ -40,3 +40,11 @@ class SubmitionForm(ModelForm):
             'title',
             'description',
         ]
+
+
+class GoalForm(ModelForm):
+    class Meta:
+        model = TaskItem
+        fields = [
+            'name',
+        ]
