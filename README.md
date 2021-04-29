@@ -29,7 +29,7 @@ python -m pip install virtualenv
 start virtual environment
 
 ```powershell
-python -m pip virtualenv <your environment name>
+python -m virtualenv <your environment name>
 ```
 
 activate
