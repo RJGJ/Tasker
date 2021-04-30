@@ -26,7 +26,9 @@
             {{ field }}
 
             {% if field.label == 'Image' %}
-                <img src="{{ user.image.url }}" alt="User Image" id="user-img">
+                {% if user.image %}
+                    <img src="{{ user.image.url }}" alt="User Image" id="user-img">
+                {% endif %}
             {% endif %}
         </div>
     {% endfor %}
