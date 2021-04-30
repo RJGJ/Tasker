@@ -9,7 +9,9 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'uphstasker.pythonanywhere.com',
+]
 
 
 INSTALLED_APPS = [
@@ -107,10 +109,11 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR,'static')
+#]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
