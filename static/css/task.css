@@ -1,0 +1,29 @@
+.cont {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+h4, input, span {
+    margin: 0.5rem;
+}
+
+#name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.goal-container {
+    display: flex;
+    align-items: center;
+}
+
+.goal-container > * {
+    margin: 0;
+    padding: 0.2rem 0.5rem;
+}
+
+.profile-pic {
+    height: 5rem;
+    width: auto;
+}
