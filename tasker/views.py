@@ -80,7 +80,7 @@ def task(request, id):
     is_admin = False
     departments = task.department.all()
     for depts in departments:
-        is_admin = True if request.user in depts.members.all() else False
+        is_admin = True if request.user in depts.head.all() else False
 
     if request.method == 'POST':
 

@@ -8,7 +8,7 @@
                 {% endif %}
                 <form class="card-body">
                     <div class="row">
-                        <img class="profile-pic col-1 rounded-circle" src="{{ user.image.url }}">
+                        <img class="profile-pic col-1 rounded-circle" src="{{ submition.user.image.url }}">
                         <div class="col p-3">
                             {% if user.last_name and user.first_name %}
                                 <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
@@ -31,7 +31,7 @@
                         <li>file 3</li>
                     </ul> {% endcomment %}
                     {% if not submition.approved %}
-                        {% if user.is_superuser %}
+                        {% if is_admin %}
                             {% comment %} <a href="#" class="col mx-2 btn rounded btn-danger">Deny</a> {% endcomment %}
                             <a href="{% url 'accept_submition' task.id submition.id %}" class="col mx-2 btn rounded btn-primary">Approve</a>
                         {% endif %}
