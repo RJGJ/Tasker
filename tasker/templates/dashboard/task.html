@@ -108,12 +108,12 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1{{ goal.id }}">
                             {% if not goal.done %}
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'create_submition' task.id %}">
-                                        Make a submition
+                                    <a class="dropdown-item" href="{% url 'create_submition' task_id=task.id goal_id=goal.id %}">
+                                        Make a submission
                                     </a>
                                 </li>
                             {% endif %}
-                            {% if user.is_superuser %}
+                            {% if is_admin %}
                                 <li>
                                     <a 
                                         class="dropdown-item" 
@@ -137,7 +137,7 @@
                 {% endfor %}
             </div>
 
-            {% if user.is_superuser %}
+            {% if is_admin %}
                 <input 
                     class="form-control" 
                     type="text" 
