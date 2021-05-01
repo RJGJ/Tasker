@@ -9,11 +9,12 @@
 
 <div class="container">
     <div class="card rounded p-3 my-3">
-        <div class="card-body">
+        <form method="POST" class="card-body">
+            {% csrf_token %}
             {{ form.as_p }}
             <button class="btn rounded btn-danger">Cancel</button>
             <input class="btn rounded btn-primary" type="submit" value="Save">
-        </div>
+        </form>
     </div>
 </div>
 

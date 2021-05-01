@@ -2,18 +2,23 @@
 {% if submitions %}
     {% for submition in submitions %}
         <div class="container-fluid">
-            <div class="card rounded p-3 mx-auto">
+            <div class="card rounded p-3 mx-auto mb-3">
                 {% if submition.approved %}
                     <p class="alert alert-success">Approved</p>
                 {% endif %}
                 <form class="card-body">
                     <div class="row">
-                        <img class="profile-pic col-1 rounded-circle" src="{{ submition.user.image.url }}">
+                        <img 
+                            class="profile-pic col-1 rounded-circle" 
+                            {% if submition.user.image %}
+                                src="{{ submition.user.image.url }}"
+                            {% endif %}
+                        >
                         <div class="col p-3">
-                            {% if user.last_name and user.first_name %}
-                                <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                            {% if submition.user.last_name and submition.user.first_name %}
+                                <h5 class="card-title">{{ submition.user.first_name }} {{ submition.user.last_name }}</h5>
                             {% else %}
-                                <h5 class="card-title">{{ user }}</h5>
+                                <h5 class="card-title">{{ submition.user }}</h5>
                             {% endif %}
                             <p class="card-text text-muted">Creation Date: {{ submition.pub_date }} | Submition ID: {{ submition.id }}</p>
                         </div>
