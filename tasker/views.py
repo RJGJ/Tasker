@@ -199,7 +199,7 @@ def add_files(request, submition_id):
 
 
 @login_required
-def create_submition(request, task_id):
+def create_submition(request, task_id, goal_id):
     form = SubmitionForm()
     errors = None
 
@@ -209,6 +209,8 @@ def create_submition(request, task_id):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.user = request.user
+            goal_obj = TaskItem.objects.get(id=goal_id)
+            obj.goal = goal_obj
             obj.task = Task.objects.get(id=task_id)
             obj.save()
 
@@ -233,11 +235,15 @@ def goal_form(request, id):
 
     if request.method == 'POST':
         if form.is_valid:
-            form.save()
-            return render(request, 'dashboard/goal-form.html', context)
+            form = GoalForm(request.POST or None, instance=goal)
+            obj = form.save()
+            task_obj = obj.task
+
+            return redirect(task, task_obj.id)
         
         else:
             errors = form.errors
+            print(errors)
 
     context = {
         'errors': errors,
