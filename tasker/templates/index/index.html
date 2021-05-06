@@ -15,12 +15,11 @@
 
 <div style="height:90vh;" class="bg-primary d-flex justify-content-center align-items-center text-light">
 	<div class="d-flex">
-		<div class="container text-right">
-			<h1>CHARACTER BUILDING</h1>
-			<h1>IS NATION BUILDING</h1>
+		<div class="d-flex align-items-center animate__animated animate__fadeInDown">
+			<p id="jumbotron" class="h1 text-right">CHARACTER BUILDING IS NATION BUILDING</p>
 		</div>
 		<div class="container text-dark">
-			<div class="card text-center p-4 rounded">
+			<div class="card text-center p-4 rounded animate__animated animate__fadeInUp">
 				<a href="{% url 'account_login' %}" class="btn btn-primary btn-lg btn-block rounded">Log In</a>
 				<p>or</p>
 				<a href="{% url 'account_signup' %}" class="btn btn-secondary btn-lg btn-block rounded">Register</a>
@@ -35,6 +34,10 @@
 <style>
 #navbar {
 	display: none;
+}
+
+#jumbotron {
+	
 }
 </style>
 
