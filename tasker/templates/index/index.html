@@ -5,23 +5,39 @@
 
 {% block styles %}
 
-<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+<!--<link rel="stylesheet" href="{% static 'css/index.css' %}" />-->
 
 {% endblock styles %}
 {% block content %}
 
-{% include 'index/index-header.html' %}
+{% include 'header.html' %}
 
-<section id="showcase">
-    <div class="container">
-        <h1><i>Tasker</i> is a website created to help groups<br>/teams finish tasks/projects on time.</h1>
-        <p>Lorem ipsum dolor sit amet,<br>
-            consectetur adipiscing elit.<br>
-            Cras scelerisque, mauris sed fringilla cursus, mi ex <br>porta libero,
-            interdum sodales lacus dolor sed neque.
-        </p>
-    </div>
-</section>
+
+<div style="height:90vh;" class="bg-primary d-flex justify-content-center align-items-center text-light">
+	<div class="d-flex">
+		<div class="container text-right">
+			<h1>CHARACTER BUILDING</h1>
+			<h1>IS NATION BUILDING</h1>
+		</div>
+		<div class="container text-dark">
+			<div class="card text-center p-4 rounded">
+				<a href="{% url 'account_login' %}" class="btn btn-primary btn-lg btn-block rounded">Log In</a>
+				<p>or</p>
+				<a href="{% url 'account_signup' %}" class="btn btn-secondary btn-lg btn-block rounded">Register</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<style>
+#navbar {
+	display: none;
+}
+</style>
+
 
 {% endblock content %}
 {% block scripts %}
