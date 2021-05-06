@@ -2,9 +2,6 @@
 {% load static %}
 
 {% block title %}Tasker Dashboard{% endblock title %}
-{% block styles %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-{% endblock styles %}
 {% block content %}
 
 {% include 'header.html' %}
@@ -15,13 +12,15 @@
             <h3>{{ department }} Tasks</h3>
         </div>
         <div class="col-md-3">
-            <a class="btn btn-primary rounded" href="{% url 'new_task' department.id %}" id="add-task-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                </svg>
-                add new
-            </a>
+        	{% if user in department.head.all %}
+            	<a class="btn btn-primary rounded" href="{% url 'new_task' department.id %}" id="add-task-btn">
+                	<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                    	<path d="M0 0h24v24H0z" fill="none"/>
+                    	<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                	</svg>
+                	add new
+            	</a>
+            {% endif %}
         </div>
         <div class="row">
             {% for task in tasks %}

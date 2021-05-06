@@ -9,10 +9,11 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-	'uphstasker.pythonanywhere.com',
-]
+ALLOWED_HOSTS = ['uphstasker.pythonanywhere.com',]
+
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+
 
 
 INSTALLED_APPS = [
