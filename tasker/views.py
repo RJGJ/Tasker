@@ -275,3 +275,14 @@ def accept_submition(request, task_id, submition_id):
     goal_obj.save()
 
     return redirect(task, task_id)
+
+
+@login_required
+def submission_view(request, submission_id):
+    print(f'id: {submission_id}')
+    submission = Submition.objects.get(id=submission_id)
+    print(f'submission: {submission}')
+    context = {
+        'submission': submission,
+    }
+    return render(request, 'submission/submission.html', context)

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ submission }}{% endblock title %}
+{% block content %}
+
+
+    {% include 'header.html' %}
+    {% include 'back.html' %}
+
+    <div class="container my-5">
+        <div class="border p-3 rounded">
+            <div class="d-flex">
+                <img 
+                    style="min-width:64px;"
+                    class="profile-pic col-1 rounded-circle" 
+                    {% if submission.user.image %}
+                        src="{{ submission.user.image.url }}"
+                    {% endif %}
+                >
+                <div class="">
+                    {% if submission.user.last_name and submission.user.first_name %}
+                        <h5 class="card-title">{{ submission.user.first_name }} {{ submission.user.last_name }}</h5>
+                    {% else %}
+                        <h5 class="card-title">{{ submission.user }}</h5>
+                    {% endif %}
+                    <p class="card-text text-muted">Creation Date: {{ submission.pub_date }}</p>
+                </div>
+            </div>
+            <hr/>
+            <h5 class="card-title">{{ submission }}</h5>
+            <p class="card-text">{{ submission.description }}</p>
+            <hr/>
+            <p>Comments:</p>
+            {% include 'comments/comment.html' %}
+        </div>
+    </div>
+
+
+{% endblock content %}

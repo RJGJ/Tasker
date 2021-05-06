@@ -3,17 +3,21 @@ from decouple import config
 
 import os
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = ['uphstasker.pythonanywhere.com']
+
+if DEBUG:
+    ALLOWED_HOSTS = [
+    '0.0.0.0',
     '127.0.0.1',
 	'uphstasker.pythonanywhere.com',
 ]
-
 
 INSTALLED_APPS = [
     'tasker',
@@ -22,6 +26,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'django_admin_generator',
 
     'django.contrib.admin',
     'django.contrib.auth',

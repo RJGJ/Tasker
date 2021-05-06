@@ -12,7 +12,7 @@
                             class="profile-pic col-1 rounded-circle" 
                             {% if submition.user.image %}
                                 src="{{ submition.user.image.url }}"
-                            {% endif %}
+                            {% endif %} 
                         >
                         <div class="col p-3">
                             {% if submition.user.last_name and submition.user.first_name %}
@@ -25,7 +25,9 @@
                     </div>
                     <hr/>
                     <h5 class="card-title">
-                        <strong>{{ submition }}</strong> 
+                        <a href="{% url 'submission_view' submition.id %}">
+                            <strong>{{ submition }}</strong>
+                        </a> 
                         for
                         <strong>{{ submition.goal }}</strong>
                     </h5>
@@ -35,12 +37,12 @@
                         <li>file 2</li>
                         <li>file 3</li>
                     </ul> {% endcomment %}
-                    {% if not submition.approved %}
+                    <!-- {% if not submition.approved %}
                         {% if is_admin %}
                             {% comment %} <a href="#" class="col mx-2 btn rounded btn-danger">Deny</a> {% endcomment %}
                             <a href="{% url 'accept_submition' task.id submition.id %}" class="col mx-2 btn rounded btn-primary">Approve</a>
                         {% endif %}
-                    {% endif %}
+                    {% endif %} -->
                 </form>
             </div>
         </div>
