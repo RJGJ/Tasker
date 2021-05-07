@@ -13,15 +13,17 @@
 {% include 'header.html' %}
 
 
-<div style="height:90vh;" class="bg-primary d-flex justify-content-center align-items-center text-light">
+<div id="hero" style="height:80vh;" class="d-flex justify-content-center align-items-center text-light">
 	<div class="d-flex">
-		<div class="d-flex align-items-center animate__animated animate__fadeInDown">
-			<p id="jumbotron" class="h1 text-right">CHARACTER BUILDING IS NATION BUILDING</p>
+		<div class="d-flex align-items-center bg-secondary rounded p-4 animate__animated animate__fadeInDown">
+			<p class="h1 text-right text-dark">
+				<strong><strong>TASKER: </strong>WEB-BASED TEAM TASK MANAGER</strong>
+			</p>
 		</div>
 		<div class="container text-dark">
 			<div class="card text-center p-4 rounded animate__animated animate__fadeInUp">
 				<a href="{% url 'account_login' %}" class="btn btn-primary btn-lg btn-block rounded">Log In</a>
-				<p>or</p>
+				<p class="pt-3">or</p>
 				<a href="{% url 'account_signup' %}" class="btn btn-secondary btn-lg btn-block rounded">Register</a>
 			</div>
 		</div>
@@ -36,8 +38,13 @@
 	display: none;
 }
 
-#jumbotron {
-	
+#hero {
+	background-image: url({% static 'images/building.gif' %});
+	background-position: center;
+  	background-repeat: no-repeat;
+	background-size: cover;
+	background-blend-mode: multiply;
+	background-color: #666666;
 }
 </style>
 
