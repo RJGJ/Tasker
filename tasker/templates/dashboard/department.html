@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tasker | {{ department }}{% endblock title %}
+{% block content %}
+    {% include 'header.html' %}
+
+    <div class="row">
+        {% include 'side-nav.html' %}
+        <div class="col">
+            <div class="container">
+                <hr>
+                <div>
+                    <p class="h1">{{ department }}</p>
+                    <p>{{ department.description }}</p>
+                </div>
+                <hr>
+                <div>
+                    <p><strong>head:</strong></p>
+                    <div class="d-flex flex-wrap">
+                        {% for head in department.head.all %}
+                            <div class="d-flex flex-column align-items-center p-1">
+                                {% if head.image %}
+                                    <img class="member-img rounded-circle border border-secondary" src="{{ head.image.url }}">
+                                {% else %}
+                                    <img class="member-img rounded-circle border border-secondary" src="https://simplyilm.com/wp-content/uploads/2017/08/temporary-profile-placeholder-1.jpg">
+                                {% endif %}
+
+                                {% if head.first_name and head.last_name %}
+                                    <p class="text-center text-wrap">{{ head.first_name }} {{ head.last_name }}</p>
+                                {% else %}
+                                    <p class="text-center text-wrap">{{ head}}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <p><strong>members:</strong></p>
+                    <div class="d-flex flex-wrap">
+                        {% for member in department.members.all %}
+                            <div class="d-flex flex-column align-items-center p-1">
+                                {% if member.image %}
+                                    <img class="member-img rounded-circle border border-secondary" src="{{ member.image.url }}">
+                                {% else %}
+                                    <img class="member-img rounded-circle border border-secondary" src="https://simplyilm.com/wp-content/uploads/2017/08/temporary-profile-placeholder-1.jpg">
+                                {% endif %}
+
+                                {% if member.first_name and member.last_name %}
+                                    <p class="text-center text-wrap">{{ member.first_name }} {{ member.last_name }}</p>
+                                {% else %}
+                                    <p class="text-center text-wrap">{{ member}}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <p><strong>tasks</strong></p>
+                    <a href="{% url 'task' department.id %}" class="btn btn-primary rounded m-1">Add new task <i class="fas fa-plus"></i></a>
+                    <div class="row my-2">
+                        <div class="border border-secondary m-1 rounded col-12 col-md-4">
+                            <div class="container my-1">
+                                <strong>Todo:</strong>
+
+                                {% for task in tasks %}
+                                    {% if task.state == 'TODO' %}
+                                        <div class="card my-1 rounded">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ task }}</h5>
+                                                <p>By: {{ task.creator }}</p>
+                                                <p>Created on: {{ task.created_on }}</p>
+                                                <p>Target Date: {{ task.due_on }}</p>
+                                                <p class="card-text text-wrap">{{ task.description }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                            </div>   
+                        </div>
+                        <div class="border border-secondary m-1 rounded col-12 col-md-4 bg-light">
+                            <div class="container my-1">
+                                <strong>Doing:</strong>
+
+                                {% for task in tasks %}
+                                    {% if task.state == 'DOING' %}
+                                        <div class="card my-1 rounded">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ task }}</h5>
+                                                <p>By: {{ task.creator }}</p>
+                                                <p>Created on: {{ task.created_on }}</p>
+                                                <p>Target Date: {{ task.due_on }}</p>
+                                                <p class="card-text text-wrap">{{ task.description }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>   
+                        </div>
+                        <div class="border border-secondary m-1 rounded col-12 col-md">
+                            <div class="container my-1">
+                                <strong>Done:</strong>
+
+                                {% for task in tasks %}
+                                    {% if task.state == 'DONE' %}
+                                        <div class="card my-1 rounded">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ task }}</h5>
+                                                <p>By: {{ task.creator }}</p>
+                                                <p>Created on: {{ task.created_on }}</p>
+                                                <p>Target Date: {{ task.due_on }}</p>
+                                                <p class="card-text text-wrap">{{ task.description }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

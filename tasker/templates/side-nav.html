@@ -1,0 +1,32 @@
+{% comment %} <button class="btn btn-primary"><i class="fa fa-bars" aria-hidden="true"></i> Menu</button> {% endcomment %}
+<div class="col-md-3 bg-light">
+    <div class="container pt-2">
+        <div class="d-flex">
+            {% if user.image %}
+                <img class="user-img rounded-circle border border-secondary animate__animated animate__fadeIn" src="{{ user.image.url }}" alt="user-img">
+            {% else %}
+                <img class="user-img rounded-circle border border-secondary animate__animated animate__fadeIn" src="https://simplyilm.com/wp-content/uploads/2017/08/temporary-profile-placeholder-1.jpg" alt="user-img">
+            {% endif %}
+            <p class="h3 align-self-center p-2 animate__animated animate__fadeIn">
+                {% if user.first_name and user.last_name %}
+                    {{ user.first_name }} {{ user.last_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+            </p>
+        </div>
+        <hr/>
+        <div class="d-grid gap-2 py-2">
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-primary rounded animate__animated animate__fadeIn animate__faster">Departments</a>
+            <a href="{% url 'index' %}" class="btn btn-outline-primary rounded animate__animated animate__fadeIn animate__fast">Tasks</a>
+            <a href="{% url 'account_settings' %}" class="btn btn-outline-primary rounded animate__animated animate__fadeIn">Account Settings</a>
+            <a href="{% url 'account_logout' %}" class="btn btn-outline-primary rounded animate__animated animate__fadeIn animate__delay">Logout</a>
+        </div>
+    </div>
+</div>
+{% comment %} <div class="row bg-secondary text-center" id="navbar">
+    <button onclick="window.location.href='{% url 'index' %}'" class="col btn btn-secondary align-middle">TASKER</button>
+    <button onclick="window.location.href='{% url 'account_logout' %}'" class="col btn btn-secondary align-middle">LOG OUT</button>
+    <button onclick="window.location.href='{% url 'dashboard' %}'" class="col btn btn-secondary align-middle">DASHBOARD</button>
+    <button onclick="window.location.href='{% url 'account_settings' %}'" class="col btn btn-secondary align-middle">ACCOUNT SETTINGS</button>
+</div> {% endcomment %}

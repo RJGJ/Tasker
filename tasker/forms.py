@@ -49,3 +49,17 @@ class GoalForm(ModelForm):
         fields = [
             'name',
         ]
+
+
+class TaskForm(ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            'name',
+            'description',
+            'state',
+            'due_on'
+        ]
+        widgets = {
+            'due_on': DateInput(attrs={'type': 'date'})
+        }
