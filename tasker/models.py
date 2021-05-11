@@ -48,11 +48,20 @@ class Department(models.Model):
 
 
 class Task(models.Model):
+
+    choices = [
+        ('TODO',  'todo'),
+        ('DOING',  'doing'),
+        ('DONE',  'done'),
+    ]
+
     name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, null=True, blank=True)
     created_on = models.DateField(auto_now=True, null=False)
-    due_on = models.DateField(null=True, blank=True, default=None)
+    due_on = models.DateField(null=True, default=None)
     department = models.ManyToManyField(Department)
+    state = models.CharField(max_length=16, choices=choices, default=None, null=False)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

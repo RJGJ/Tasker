@@ -1,7 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
 
-<div class="row bg-primary p-2">
+{% comment %} <div class="row bg-primary p-2">
     <div class="col-2 d-flex align-items-center mx-auto p-0">
         <img id="logo" class="d-block" src="{% static 'images/logo.png' %}" alt="School Logo">
     </div>
@@ -20,11 +20,38 @@
         </div>
     </div>
     <div class="col-2 mx-auto"><!-- spacer --></div>
+</div> {% endcomment %}
+
+<div class="row bg-primary p-2">
+    <div class="col-2 col-md">
+        <div class="container">
+            <img id="logo" class="d-block" src="{% static 'images/logo.png' %}" alt="School Logo">
+        </div>
+    </div>
+    <div class="col-8 col-md">
+        <div class="container text-light m-auto d-md-none text-center">
+            <h4>UNIVERSITY OF PERPETUAL HELP SYSTEM GMA</h4>
+        </div>
+        <div class="container mx-auto text-light d-none d-md-block text-center">
+            <h3>UNIVERSITY OF PERPETUAL HELP SYSTEM GMA</h3>
+            {% comment %} <p>
+                San Gabriel, General Mariano Alvarez (GMA), Cavite <br>
+                Contact: (0909) 809 - 4200 / (046) 460 - 4086 • (02) <br>
+                email: guidance@gma.uphsl.edu.ph / marketing@gma.uphsl.edu.ph <br>
+                website: <a class="badge" href="http://www.uphsl.edu.ph">www.uphsl.edu.ph</a>
+            </p> {% endcomment %}
+        </div>
+    </div>
+    <div class="col-2 col-md"></div>
 </div>
 
-<div class="row bg-secondary text-center" id="navbar">
+<div class="row bg-secondary py-1"></div>
+
+{% comment %} {% include 'side-nav.html' %} {% endcomment %}
+
+{% comment %} <div class="row bg-secondary text-center" id="navbar">
     <button onclick="window.location.href='{% url 'index' %}'" class="col btn btn-secondary align-middle">TASKER</button>
     <button onclick="window.location.href='{% url 'account_logout' %}'" class="col btn btn-secondary align-middle">LOG OUT</button>
     <button onclick="window.location.href='{% url 'dashboard' %}'" class="col btn btn-secondary align-middle">DASHBOARD</button>
     <button onclick="window.location.href='{% url 'account_settings' %}'" class="col btn btn-secondary align-middle">ACCOUNT SETTINGS</button>
-</div>
+</div> {% endcomment %}
