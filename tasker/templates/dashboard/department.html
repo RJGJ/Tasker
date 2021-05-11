@@ -59,7 +59,7 @@
                     <p><strong>tasks</strong></p>
                     <a href="{% url 'task' department.id %}" class="btn btn-primary rounded m-1">Add new task <i class="fas fa-plus"></i></a>
                     <div class="row my-2">
-                        <div class="border border-secondary m-1 rounded col-12 col-md-4">
+                        <div class="border border-primary m-1 rounded col-12 col-md-3">
                             <div class="container my-1">
                                 <strong>Todo:</strong>
 
@@ -67,7 +67,18 @@
                                     {% if task.state == 'TODO' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{ task }}</h5>
+                                                <div class="d-flex flex-row justify-content-between">
+                                                    <h5 class="card-title">{{ task }}</h5>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Change State
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">Doing</a>
+                                                            <a class="dropdown-item" href="{% url 'change_state' 2 task.id %}">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <p>By: {{ task.creator }}</p>
                                                 <p>Created on: {{ task.created_on }}</p>
                                                 <p>Target Date: {{ task.due_on }}</p>
@@ -79,7 +90,7 @@
                                 
                             </div>   
                         </div>
-                        <div class="border border-secondary m-1 rounded col-12 col-md-4 bg-light">
+                        <div class="border border-secondary m-1 rounded col-12 col-md-3 bg-light">
                             <div class="container my-1">
                                 <strong>Doing:</strong>
 
@@ -87,7 +98,18 @@
                                     {% if task.state == 'DOING' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{ task }}</h5>
+                                                <div class="d-flex flex-row justify-content-between">
+                                                    <h5 class="card-title">{{ task }}</h5>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Change State
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">Todo</a>
+                                                            <a class="dropdown-item" href="{% url 'change_state' 2 task.id %}">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <p>By: {{ task.creator }}</p>
                                                 <p>Created on: {{ task.created_on }}</p>
                                                 <p>Target Date: {{ task.due_on }}</p>
@@ -99,7 +121,7 @@
 
                             </div>   
                         </div>
-                        <div class="border border-secondary m-1 rounded col-12 col-md">
+                        <div class="border border-success m-1 rounded col-12 col-md-3">
                             <div class="container my-1">
                                 <strong>Done:</strong>
 
@@ -107,7 +129,18 @@
                                     {% if task.state == 'DONE' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{ task }}</h5>
+                                                <div class="d-flex flex-row justify-content-between">
+                                                    <h5 class="card-title">{{ task }}</h5>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-success rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Change State
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">Todo</a>
+                                                            <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">Doing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <p>By: {{ task.creator }}</p>
                                                 <p>Created on: {{ task.created_on }}</p>
                                                 <p>Target Date: {{ task.due_on }}</p>
@@ -125,3 +158,15 @@
         </div>
     </div>
 {% endblock content %}
+{% block scripts %}
+
+<script>
+    // for the dropdown menus
+    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl)
+    });
+    console.log('hello');
+</script>
+
+{% endblock scripts %}

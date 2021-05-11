@@ -16,5 +16,6 @@ urlpatterns = [
     path('goal-form/<int:id>/', goal_form, name='goal_form'),
     path('new-goal/<int:task_id>/<str:title>', new_goal, name='new-goal'),
     path('accept-submition/<int:task_id>/<int:submition_id>/', accept_submition, name='accept_submition'),
-    path('department/<int:dept_id>', department, name='department')
+    path('department/<int:dept_id>', department, name='department'),
+    path('change-state/<int:state>/<int:task_id>/', change_state, name='change_state'),
 ]
