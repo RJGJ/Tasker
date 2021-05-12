@@ -3,4 +3,4 @@
 *media
 *scss/
 *.env
-static/
+/static
