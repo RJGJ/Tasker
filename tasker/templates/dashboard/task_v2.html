@@ -20,19 +20,29 @@
         <div class="container my-2">
             <hr>
             {% include 'back.html' %}
-            <h1>Task Form</h1>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="d-flex justify-content-center">
-                    <a href="#" class="btn btn-danger rounded m-1">Delete</a>
-                    {% if task %}
-                        <input class="btn btn-primary rounded m-1" type="submit" value="Update">
-                    {% else %}
-                        <input class="btn btn-primary rounded m-1" type="submit" value="Add">
+            <div class="my-3">
+                <h1>Task Form</h1>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {% if errors %}
+                        <div class="alert alert-danger">
+                            {{ errors }}
+                        </div>
                     {% endif %}
-                </div>
-            </form>
+
+                    {{ form.as_p }}
+
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-danger rounded m-1">Delete</a>
+                        {% if task %}
+                            <input class="btn btn-primary rounded m-1" type="submit" value="Update">
+                        {% else %}
+                            <input class="btn btn-primary rounded m-1" type="submit" value="Add">
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -53,6 +63,47 @@
         $('select').addClass('form-select rounded');
         $('label').addClass('form-label rounded');
         $('.errorlist').addClass('alert alert-danger pl-1 rounded');
+    </script>
+
+
+    <script>
+        /*
+            we're gonna replace default option for assignee input to properly name options
+            the default is the username and we want to change it if the user have a proper name
+        */
+
+        // remove options
+        $('#id_assignee > option').remove();
+
+        // get proper name from api
+        $.getJSON({
+            url: "{% url 'proper_names' dept_id %}",
+            type: 'GET',
+            dataType: 'json',
+            data: {},
+        })
+
+        // set proper names
+        .done(function(data) {
+            const names = data.names;
+            const select_el = $('#id_assignee');
+
+            select_el.append(/*html*/`
+                <option value=""></option>
+            `);
+            
+            for (var key in names){
+                const template = /*html*/`
+                    <option value="${ key }">${ names[key] }</option>`;
+                
+                select_el.append(template);
+            }
+        })
+
+        .fail((err) => {
+            console.log(err);
+        });
+
     </script>
 
 

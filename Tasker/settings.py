@@ -19,6 +19,7 @@ if DEBUG:
 INSTALLED_APPS = [
     'tasker',
 
+    'django_admin_generator',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

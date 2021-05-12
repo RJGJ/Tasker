@@ -1,4 +1,6 @@
-from django.http.response import HttpResponseRedirect
+from django.db.models.query import QuerySet
+from django.forms.utils import ErrorDict
+from django.http.response import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.http.request import HttpRequest
 
@@ -60,6 +62,8 @@ def task(request, dept_id, task_id=None):
     dept = Department.objects.get(id=dept_id)
     form = TaskForm()
     task = None
+    errors: ErrorDict = ErrorDict()
+
     if not task_id == None:
         task = Task.objects.get(id=task_id)
         form = TaskForm(instance=task)
@@ -73,10 +77,14 @@ def task(request, dept_id, task_id=None):
             obj.save()
 
             return redirect(department, dept.id)
-
+        
+        else:
+            errors = form.errors
     context = {
         'form': form,
         'task': task,
+        'errors': errors,
+        'dept_id': dept_id,
     }
 
     return render(request, 'dashboard/task_v2.html', context)
@@ -102,110 +110,131 @@ def delete_task(request, id):
 
 
 @login_required
-def delete_goal(request, id):
-    goal = TaskItem.objects.get(id=id)
-    g_task = goal.task.all()[0]
+def proper_names(request:HttpRequest, department_id:int) -> JsonResponse:
+    dept: Department = Department.objects.get(id=department_id)
+    users: QuerySet[User] = dept.members.all()
+
+    names: dict = {}
+
+    user: User
+    for user in users:
+        names[user.pk] = user.username
+        
+        if user.first_name and user.last_name:
+            names[user.pk] = f'{user.first_name} {user.last_name}'
+
+    data = {
+        'message': 'hello',
+        'names': names,
+    }
+    return JsonResponse(data)
+
+
+# @login_required
+# def delete_goal(request, id):
+#     goal = TaskItem.objects.get(id=id)
+#     g_task = goal.task.all()[0]
     
-    if request.method == 'POST':
-        option = request.POST['option']
-        option = option.lower().strip() # clean the string
+#     if request.method == 'POST':
+#         option = request.POST['option']
+#         option = option.lower().strip() # clean the string
 
-        if option == 'delete':
-            goal.delete()
-            return redirect(task, g_task.id)
+#         if option == 'delete':
+#             goal.delete()
+#             return redirect(task, g_task.id)
         
-        elif option == 'cancel':
-            return redirect(task, g_task.id)
+#         elif option == 'cancel':
+#             return redirect(task, g_task.id)
 
-    return render(request, 'dashboard/delete-item.html', {'item': goal})
-
-
-@login_required
-def add_files(request, submition_id):
-    pass
+#     return render(request, 'dashboard/delete-item.html', {'item': goal})
 
 
-@login_required
-def create_submition(request, task_id, goal_id):
-    form = SubmitionForm()
-    errors = None
-
-    if request.method == 'POST':
-        form = SubmitionForm(request.POST or None)
-
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.user = request.user
-            goal_obj = TaskItem.objects.get(id=goal_id)
-            obj.goal = goal_obj
-            obj.task = Task.objects.get(id=task_id)
-            obj.save()
-
-            return redirect(task, task_id)
-
-        else:
-            errors = form.errors
-
-    context = {
-        'errors': errors,
-        'form': form,
-    }
-
-    return render(request, 'dashboard/create-submition.html', context)
+# @login_required
+# def add_files(request, submition_id):
+#     pass
 
 
-@login_required
-def goal_form(request, id):
-    goal = TaskItem.objects.get(id=id)
-    form = GoalForm(instance=goal)
-    errors = None
+# @login_required
+# def create_submition(request, task_id, goal_id):
+#     form = SubmitionForm()
+#     errors = None
 
-    if request.method == 'POST':
-        if form.is_valid:
-            form = GoalForm(request.POST or None, instance=goal)
-            obj = form.save()
-            task_obj = obj.task
+#     if request.method == 'POST':
+#         form = SubmitionForm(request.POST or None)
 
-            return redirect(task, task_obj.id)
+#         if form.is_valid():
+#             obj = form.save(commit=False)
+#             obj.user = request.user
+#             goal_obj = TaskItem.objects.get(id=goal_id)
+#             obj.goal = goal_obj
+#             obj.task = Task.objects.get(id=task_id)
+#             obj.save()
+
+#             return redirect(task, task_id)
+
+#         else:
+#             errors = form.errors
+
+#     context = {
+#         'errors': errors,
+#         'form': form,
+#     }
+
+#     return render(request, 'dashboard/create-submition.html', context)
+
+
+# @login_required
+# def goal_form(request, id):
+#     goal = TaskItem.objects.get(id=id)
+#     form = GoalForm(instance=goal)
+#     errors = None
+
+#     if request.method == 'POST':
+#         if form.is_valid:
+#             form = GoalForm(request.POST or None, instance=goal)
+#             obj = form.save()
+#             task_obj = obj.task
+
+#             return redirect(task, task_obj.id)
         
-        else:
-            errors = form.errors
-            print(errors)
+#         else:
+#             errors = form.errors
+#             print(errors)
 
-    context = {
-        'errors': errors,
-        'form': form,
-    }
+#     context = {
+#         'errors': errors,
+#         'form': form,
+#     }
 
-    return render(request, 'dashboard/goal-form.html', context)
+#     return render(request, 'dashboard/goal-form.html', context)
+
+
+# @login_required
+# def new_goal(request, task_id, title):
+
+#     new_goal_obj = TaskItem(name=title)
+#     new_goal_obj.task = Task.objects.get(id=task_id)
+#     new_goal_obj.save()
+
+#     return redirect(task, task_id)
+
+
+# @login_required
+# def accept_submition(request, task_id, submition_id):
+
+#     submition_obj = Submition.objects.get(id=submition_id)
+#     submition_obj.approved = True
+#     submition_obj.save()
+
+#     goal_obj = submition_obj.goal
+#     goal_obj.done = True
+#     goal_obj.save()
+
+#     return redirect(task, task_id)
 
 
 @login_required
-def new_goal(request, task_id, title):
-
-    new_goal_obj = TaskItem(name=title)
-    new_goal_obj.task = Task.objects.get(id=task_id)
-    new_goal_obj.save()
-
-    return redirect(task, task_id)
-
-
-@login_required
-def accept_submition(request, task_id, submition_id):
-
-    submition_obj = Submition.objects.get(id=submition_id)
-    submition_obj.approved = True
-    submition_obj.save()
-
-    goal_obj = submition_obj.goal
-    goal_obj.done = True
-    goal_obj.save()
-
-    return redirect(task, task_id)
-
-
-@login_required
-def change_state(request:HttpRequest, state:int, task_id:int):
+def change_state(request, state:int, task_id:int):
 
     states = {
         0: 'TODO',

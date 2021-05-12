@@ -17,7 +17,7 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
 
     def _make_square(self, img):
-        min_size = 256
+        min_size = 128
         fill_color = (1, 1, 1)
         x, y = img.size
         size = max(min_size, x, y)
@@ -62,35 +62,36 @@ class Task(models.Model):
     department = models.ManyToManyField(Department)
     state = models.CharField(max_length=16, choices=choices, default=None, null=False)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    assignee = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 
-# task item is goal in the website :D
-class TaskItem(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    description = models.CharField(max_length=255, null=True, blank=True)
-    done = models.BooleanField(null=False, default=False)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, default=None)
+# # task item is goal in the website :D
+# class TaskItem(models.Model):
+#     name = models.CharField(max_length=255, unique=True)
+#     description = models.CharField(max_length=255, null=True, blank=True)
+#     done = models.BooleanField(null=False, default=False)
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, default=None)
 
-    def __str__(self):
-        return self.name
-
-
-class Submition(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    pub_date = models.DateTimeField(auto_now=True, null=False)
-    title = models.CharField(max_length=254, null=False)
-    description = models.CharField(max_length=254, null=True)
-    approved = models.BooleanField(default=False)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
-    goal = models.ForeignKey(TaskItem, on_delete=models.CASCADE, default=None, null=True)
-
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.name
 
 
-class SubmitionFile(models.Model):
-    file = models.FileField()
-    submition_parent = models.ForeignKey(Submition, on_delete=models.CASCADE, default=None)
+# class Submition(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+#     pub_date = models.DateTimeField(auto_now=True, null=False)
+#     title = models.CharField(max_length=254, null=False)
+#     description = models.CharField(max_length=254, null=True)
+#     approved = models.BooleanField(default=False)
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
+#     goal = models.ForeignKey(TaskItem, on_delete=models.CASCADE, default=None, null=True)
+
+#     def __str__(self):
+#         return self.title
+
+
+# class SubmitionFile(models.Model):
+#     file = models.FileField()
+#     submition_parent = models.ForeignKey(Submition, on_delete=models.CASCADE, default=None)

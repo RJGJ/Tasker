@@ -20,47 +20,6 @@
     </div>
 </div>
 
-{% comment %} 
-<div class="col">
-{% for department in departments %}
-        <div class="row container-fluid p-3">
-            <div class="col-md mr-auto">
-                <h3>{{ department }} Tasks</h3>
-            </div>
-            <div class="col-md-3">
-                {% if user in department.head.all %}
-                    <a class="btn btn-primary rounded" href="{% url 'new_task' department.id %}" id="add-task-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
-                            <path d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                        </svg>
-                        add new
-                    </a>
-                {% endif %}
-            </div>
-            <div class="row">
-                {% for task in tasks %}
-                    {% if department in task.department.all %}
-                        <div class="contianer col-sm-12 col-md-5 col-lg p-3 m-1">
-                            <div class="card rounded">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ task }}</h5>
-                                    <p class="card-text text-muted">{{ task.created_on }}</p>
-                                    <hr/>
-                                    <p class="card-text">{{ task.description }}</p>
-                                    <a href="/task/{{task.id}}/" class="btn btn-primary rounded">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        <hr/>
-    {% endfor %} 
-</div>
-{% endcomment %}
-
 {% endblock content %}
 {% block scripts %}
     <script src="{% static 'js/dashboard.js' %}"></script>

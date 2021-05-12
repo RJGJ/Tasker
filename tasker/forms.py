@@ -34,21 +34,21 @@ class UserForm(ModelForm):
         ]
 
 
-class SubmitionForm(ModelForm):
-    class Meta:
-        model = Submition
-        fields = [
-            'title',
-            'description',
-        ]
+# class SubmitionForm(ModelForm):
+#     class Meta:
+#         model = Submition
+#         fields = [
+#             'title',
+#             'description',
+#         ]
 
 
-class GoalForm(ModelForm):
-    class Meta:
-        model = TaskItem
-        fields = [
-            'name',
-        ]
+# class GoalForm(ModelForm):
+#     class Meta:
+#         model = TaskItem
+#         fields = [
+#             'name',
+#         ]
 
 
 class TaskForm(ModelForm):
@@ -58,7 +58,8 @@ class TaskForm(ModelForm):
             'name',
             'description',
             'state',
-            'due_on'
+            'due_on',
+            'assignee',
         ]
         widgets = {
             'due_on': DateInput(attrs={'type': 'date'})
