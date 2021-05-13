@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Tasker | your tasks{% endblock title %}
+{% block content %}
+    {% include 'header.html' %}
+
+    <div class="row">
+        {% include 'side-nav.html' %}
+        <div class="col">
+            <div class="container">
+                <hr>
+                <h3>Task Feed</h3>
+
+                <!-- tasks -->
+                <div>
+                    {% for task in tasks %}
+                        <div class="card m-3 rounded border-primary">
+                            <div class="card-body">
+                                <a href="{% url 'department' task.department.all.first.id %}">
+                                    <h5 class="card-title">{{ task }}</h5>
+                                </a>
+                                <p class="card-text text-muted">
+                                    <span>Department: {{ task.department.all.first }}</span><br>
+                                    <span>Target Date: {{ task.due_on }}</span><br>
+                                </p>
+                                <p class="card-text">
+                                    <span>{{ task.description }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
