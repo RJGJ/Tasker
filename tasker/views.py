@@ -1,6 +1,8 @@
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db.models.query import QuerySet
+from django.db.models.query_utils import Q
 from django.forms.utils import ErrorDict
-from django.http.response import HttpResponseRedirect, JsonResponse
+from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.http.request import HttpRequest
 
@@ -233,6 +235,23 @@ def proper_names(request:HttpRequest, department_id:int) -> JsonResponse:
 #     return redirect(task, task_id)
 
 
+@login_required
+def task_feed(request:HttpRequest):
+    user = request.user
+    tasks = Task.objects.filter(
+        Q(assignee__in=[user]) |
+        Q(department__head__in=[user])
+    )
+
+    print(tasks)
+
+    context = {
+        'tasks': tasks,
+    }
+    return render(request, 'dashboard/task-feed.html', context)
+
+
+# API
 @login_required
 def change_state(request, state:int, task_id:int):
 
