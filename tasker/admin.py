@@ -8,13 +8,13 @@ class UserAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
-        'password',
-        'last_login',
-        'is_superuser',
         'username',
         'first_name',
         'last_name',
         'email',
+        'password',
+        'last_login',
+        'is_superuser',
         'is_staff',
         'is_active',
         'date_joined',
@@ -46,7 +46,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'name', 'description')
     list_filter = ('id', 'name', 'description')
-    raw_id_fields = ('members', 'head')
+    # raw_id_fields = ('members', 'head')
     search_fields = ('name',)
 
 
