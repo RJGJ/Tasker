@@ -60,11 +60,13 @@ class TaskAdmin(admin.ModelAdmin):
         'due_on',
         'state',
         'creator',
+        'assignee',
     )
     list_filter = (
         'created_on',
         'due_on',
         'creator',
+        'assignee',
         'id',
         'name',
         'description',
@@ -72,9 +74,33 @@ class TaskAdmin(admin.ModelAdmin):
         'due_on',
         'state',
         'creator',
+        'assignee',
     )
     raw_id_fields = ('department',)
     search_fields = ('name',)
+
+
+class DepartmentFileAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'id',
+        'file',
+        'department',
+        'uploader',
+        'upload_date',
+        'description',
+    )
+    list_filter = (
+        'department',
+        'uploader',
+        'upload_date',
+        'id',
+        'file',
+        'department',
+        'uploader',
+        'upload_date',
+        'description',
+    )
 
 
 def _register(model, admin_class):
@@ -84,3 +110,4 @@ def _register(model, admin_class):
 _register(models.User, UserAdmin)
 _register(models.Department, DepartmentAdmin)
 _register(models.Task, TaskAdmin)
+_register(models.DepartmentFile, DepartmentFileAdmin)

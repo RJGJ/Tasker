@@ -10,7 +10,7 @@
             <div class="container">
                 <hr>
                 <div>
-                    <p class="h1">{{ department }}</p>
+                    <p class="h1 text-primary">{{ department }}</p>
                     <p>{{ department.description }}</p>
                 </div>
                 <hr>
@@ -71,9 +71,14 @@
                     </div>
                 </div>
                 <hr>
+                {% include 'dashboard/files.html' %}
+                <hr>
                 <div>
                     <p><strong>tasks</strong></p>
-                    <a href="{% url 'task' department.id %}" class="btn btn-primary rounded m-1">Add new task <i class="fas fa-plus"></i></a>
+                    <a href="{% url 'task' department.id %}" class="btn btn-primary rounded m-1">
+                        Add new task 
+                        <i class="fas fa-plus"></i>
+                    </a>
                     <div class="row my-2">
                         <div class="border border-primary m-1 rounded col-12 col-md-3">
                             <div class="container my-1">

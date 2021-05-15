@@ -1,9 +1,13 @@
+from typing import Tuple
 from django.db import models
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import AbstractUser
 
 from PIL import Image
 from io import BytesIO
+
+from django.db.models.fields.files import FieldFile
+from django.forms.fields import FileField
 
 
 # Create your models here.
@@ -68,30 +72,12 @@ class Task(models.Model):
         return self.name
 
 
-# # task item is goal in the website :D
-# class TaskItem(models.Model):
-#     name = models.CharField(max_length=255, unique=True)
-#     description = models.CharField(max_length=255, null=True, blank=True)
-#     done = models.BooleanField(null=False, default=False)
-#     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, default=None)
+class DepartmentFile(models.Model):
+    file = models.FileField()
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    upload_date = models.DateField(auto_now=True)
+    description = models.CharField(max_length=255)
 
-#     def __str__(self):
-#         return self.name
-
-
-# class Submition(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-#     pub_date = models.DateTimeField(auto_now=True, null=False)
-#     title = models.CharField(max_length=254, null=False)
-#     description = models.CharField(max_length=254, null=True)
-#     approved = models.BooleanField(default=False)
-#     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=None, null=True)
-#     goal = models.ForeignKey(TaskItem, on_delete=models.CASCADE, default=None, null=True)
-
-#     def __str__(self):
-#         return self.title
-
-
-# class SubmitionFile(models.Model):
-#     file = models.FileField()
-#     submition_parent = models.ForeignKey(Submition, on_delete=models.CASCADE, default=None)
+    def __str__(self):
+        return self.file.name

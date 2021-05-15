@@ -1,4 +1,4 @@
-from django.forms import *
+from django.forms import ModelForm, TextInput, EmailInput, DateInput, fields
 from .models import *
 from django.db.models.query_utils import DeferredAttribute
 
@@ -34,23 +34,6 @@ class UserForm(ModelForm):
         ]
 
 
-# class SubmitionForm(ModelForm):
-#     class Meta:
-#         model = Submition
-#         fields = [
-#             'title',
-#             'description',
-#         ]
-
-
-# class GoalForm(ModelForm):
-#     class Meta:
-#         model = TaskItem
-#         fields = [
-#             'name',
-#         ]
-
-
 class TaskForm(ModelForm):
     class Meta:
         model = Task
@@ -64,3 +47,9 @@ class TaskForm(ModelForm):
         widgets = {
             'due_on': DateInput(attrs={'type': 'date'})
         }
+
+
+class DepartmentFileForm(ModelForm):
+    class Meta:
+        model = DepartmentFile
+        exclude = ['uploader', 'department']
