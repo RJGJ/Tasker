@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Tasker | Upload File{% endblock title %}
+
+{% block content %}
+    {% include 'header.html' %}
+    <div class="row">
+        {% include 'side-nav.html' %}
+        <div class="col">
+            <div class="container my-3">
+                <hr>
+                <h3>Upload File</h3>
+                <form enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+
+                    {% if errors %}
+                        <div class="alert alert-danger rounded p-1">
+                            {{ errors }}
+                        </div>
+                    {% endif %}
+                    
+                    {{ form.as_p }}
+                    
+                    <input type="submit" value="Upload" class="btn btn-primary rounded">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+<script>
+    $('input[type="text"]').addClass('form-control');
+    $('input[type="file"]').addClass('form-control-file');
+</script>
+{% endblock scripts %}
