@@ -5,11 +5,15 @@
         <div class="row mx-1" style="max-height:60vh;height:auto;overflow:scroll;">
             {% for file in files %}
                 <div class="col-sm col-md-6 col-lg-4 col-xl-3">
-                    <div class="border border-primary rounded p-2 my-1 text-truncate">
-                        <a href="{{ file.file.url }}">{{ file }}</a><br>
-                        <span>uploader: {{ file.uploader }}</span><br>
-                        <span>upload date: {{ file.upload_date }}</span><br>
-                        <span>description: {{ file.description }}</span><br>
+                    <div class="border border-primary rounded p-2 my-1">
+                        <div class="text-truncate text-muted">
+                            <a href="{{ file.file.url }}">{{ file }}</a><br>
+                            <span>uploader: {{ file.uploader }}</span><br>
+                            <span>upload date: {{ file.upload_date }}</span>
+                        </div>
+                        <div class="text-break">
+                            <p>{{ file.description }}</p>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
