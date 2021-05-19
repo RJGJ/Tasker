@@ -9,11 +9,10 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['uphstasker.pythonanywhere.com',]
+ALLOWED_HOSTS = ['uphstasker.pythonanywhere.com', ]
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
-
 
 
 INSTALLED_APPS = [
@@ -31,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -85,6 +84,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_REDIRECT_URL = "/dashboard/"
 LOGIN_REDIRECT_URL = "/dashboard/"
+ACCOUNT_EMAIL_REQUIRED = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -115,7 +115,7 @@ STATIC_URL = '/static/'
 
 if DEBUG:
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR,'static')
+        os.path.join(BASE_DIR, 'static')
     ]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')

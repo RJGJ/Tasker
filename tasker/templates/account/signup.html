@@ -49,6 +49,9 @@
     $('input[type="checkbox"]').addClass('form-check-label');
     $('label').addClass('form-label');
     $('.errorlist').addClass('alert alert-danger pl-1');
+
+    $('#signup_form > p:nth-child(5) > label').text('Retype Password');
+    $('#id_password2').attr('placeholder', 'Retype Password');
   </script>
 
 {% endblock scripts %}
