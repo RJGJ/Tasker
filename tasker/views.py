@@ -141,9 +141,7 @@ def task_feed(request: HttpRequest):
     tasks = Task.objects.filter(
         Q(assignee__in=[user]) |
         Q(department__head__in=[user])
-    )
-
-    print(tasks)
+    ).exclude(state='DONE')
 
     context = {
         'tasks': tasks,
