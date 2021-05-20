@@ -12,6 +12,7 @@ from allauth.account.decorators import login_required
 from .models import *
 from .forms import *
 from .test_functions import *
+from .filters import *
 
 
 # Create your views here.def index(request):
@@ -142,9 +143,12 @@ def task_feed(request: HttpRequest):
         Q(assignee__in=[user]) |
         Q(department__head__in=[user])
     ).exclude(state='DONE')
+    filter = TaskFilter(request.GET, queryset=tasks)
+    tasks = filter.qs
 
     context = {
         'tasks': tasks,
+        'filter': filter,
     }
     return render(request, 'dashboard/task-feed.html', context)
 
