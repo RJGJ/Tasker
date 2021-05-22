@@ -10,6 +10,7 @@ export default {
 
   data() {
     return {
+      departmentID: 0,
       currentDate: new Date(),
       // Attributes are supplied as an array
       attributes: [
@@ -17,10 +18,21 @@ export default {
           key: "today",
           dot: "red",
           dates: [
-            new Date(2021, 4, 1), // Jan 1st
-            new Date(2021, 4, 10), // Jan 10th
-            new Date(2021, 4, 22), // Jan 22nd
+            new Date(2021, 4, 1),
+            new Date(2021, 4, 10),
+            new Date(2021, 4, 22),
           ],
+          popover: {
+            label: "this is an example popoverrrr",
+          },
+        },
+        {
+          key: "not today",
+          dot: "green",
+          dates: [new Date(2021, 4, 22)],
+          popover: {
+            label: "<3 <3",
+          },
         },
       ],
     };
@@ -30,6 +42,12 @@ export default {
     getCurrentDate() {
       return this.currentDate;
     },
+
+    getData() {},
+  },
+
+  mounted() {
+    this.getData();
   },
 };
 </script>
