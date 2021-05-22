@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <hr>
-                {% include 'dashboard/files.html' %}
+                {% include 'dashboard/calendar.html' %}
                 <hr>
                 <div>
                     <p><strong>tasks</strong></p>
@@ -226,12 +226,15 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                {% include 'dashboard/files.html' %}
             </div>
         </div>
     </div>
 {% endblock content %}
 {% block scripts %}
 
+<script src="{% static 'js/calendar.js' %}"></script>
 <script>
     // for the dropdown menus
     var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
