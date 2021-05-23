@@ -1,9 +1,9 @@
-<div style="max-height:60vh;height:auto;overflow:scroll;">
+<div>
     <button class="btn btn-primary rounded" id="calendar-toggler">
         calendar 
         <i class="fas fa-chevron-down"></i>
     </button>
-    <div id="calendar-container" style="display:none;" class="py-1">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum!</p>
+    <div id="calendar-container" style="display:none;" class="pt-2">
+        {% include 'calendar/dist/index.html' %}
     </div>
 </div>
