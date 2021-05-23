@@ -18,6 +18,7 @@ urlpatterns = [
 
 # API
 urlpatterns += [
-    path('api/proper-names/<int:department_id>',
+    path('api/proper-names/<int:department_id>/',
          proper_names, name='proper_names'),
+    path('api/get-tasks/<int:department_id>/', get_tasks, name="get_tasks"),
 ]

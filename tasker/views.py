@@ -1,11 +1,11 @@
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.core.checks.messages import Error
+
 from django.db.models.query import QuerySet
 from django.db.models.query_utils import Q
 from django.forms.utils import ErrorDict
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.http.request import HttpRequest
+from django.core import serializers
 
 from allauth.account.decorators import login_required
 
@@ -116,27 +116,6 @@ def delete_task(request, id):
 
 
 @login_required
-def proper_names(request: HttpRequest, department_id: int) -> JsonResponse:
-    dept: Department = Department.objects.get(id=department_id)
-    users: QuerySet[User] = dept.members.all()
-
-    names: dict = {}
-
-    user: User
-    for user in users:
-        names[user.pk] = user.username
-
-        if user.first_name and user.last_name:
-            names[user.pk] = f'{user.first_name} {user.last_name}'
-
-    data = {
-        'message': 'hello',
-        'names': names,
-    }
-    return JsonResponse(data)
-
-
-@login_required
 def task_feed(request: HttpRequest):
     user = request.user
     tasks = Task.objects.filter(
@@ -151,24 +130,6 @@ def task_feed(request: HttpRequest):
         'filter': filter,
     }
     return render(request, 'dashboard/task-feed.html', context)
-
-
-# API
-@login_required
-def change_state(request, state: int, task_id: int):
-
-    states = {
-        0: 'TODO',
-        1: 'DOING',
-        2: 'DONE',
-    }
-
-    task: Task = Task.objects.get(id=task_id)
-    new_state = states[state]
-    task.state = new_state
-    task.save()
-
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -197,3 +158,48 @@ def add_file(request: HttpRequest, department_id: int):
         'form': form,
     }
     return render(request, 'dashboard/upload-file.html', context)
+
+
+@login_required
+def change_state(request, state: int, task_id: int):
+
+    states = {
+        0: 'TODO',
+        1: 'DOING',
+        2: 'DONE',
+    }
+
+    task: Task = Task.objects.get(id=task_id)
+    new_state = states[state]
+    task.state = new_state
+    task.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# API
+@login_required
+def proper_names(request: HttpRequest, department_id: int) -> JsonResponse:
+    dept: Department = Department.objects.get(id=department_id)
+    users: QuerySet[User] = dept.members.all()
+
+    names: dict = {}
+
+    user: User
+    for user in users:
+        names[user.pk] = user.username
+
+        if user.first_name and user.last_name:
+            names[user.pk] = f'{user.first_name} {user.last_name}'
+
+    data = {
+        'message': 'hello',
+        'names': names,
+    }
+    return JsonResponse(data)
+
+
+def get_tasks(request: HttpRequest, department_id: int) -> HttpResponse:
+    tasks = Task.objects.filter(department__id=department_id)
+    json_tasks = serializers.serialize('json', tasks)
+    return HttpResponse(json_tasks, content_type='application/json')
