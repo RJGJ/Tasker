@@ -10,6 +10,16 @@
                 <hr>
                 <h3>Task Feed</h3>
 
+                <form method="GET" class="row" id="filter-form">
+                    {% csrf_token %}
+                    {{ filter.form.as_p }}
+                    <div class="container">
+                        <input type="submit" value="Search" class="btn btn-primary rounded">
+                    </div>
+                </form>
+
+                <hr>
+
                 <!-- tasks -->
                 <div>
                     {% for task in tasks %}
@@ -33,3 +43,10 @@
         </div>
     </div>
 {% endblock content %}
+{% block scripts %}
+    <script>
+        $('input[type="text"]').addClass('form-control rounded');
+        $('select').addClass('form-select rounded');
+        $('#filter-form > p').addClass('col-12 col-md-6 col-lg-4 col-xl-3');
+    </script>
+{% endblock scripts %}

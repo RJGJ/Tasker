@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <hr>
-                {% include 'dashboard/files.html' %}
+                {% include 'dashboard/calendar.html' %}
                 <hr>
                 <div>
                     <p><strong>tasks</strong></p>
@@ -226,13 +226,19 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                {% include 'dashboard/files.html' %}
             </div>
         </div>
     </div>
 {% endblock content %}
 {% block scripts %}
 
+<script src="{% static 'js/calendar.js' %}"></script>
 <script>
+    // add department id on cookies for the calendar
+    document.cookie = 'department_id={{ department.id }};path=/';
+
     // for the dropdown menus
     var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
     var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
@@ -244,6 +250,19 @@
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)
     })
+
+    // reload the page again beacause calendar does not automaticaly
+    // update its values. This is a temporary solution
+    if( window.localStorage ) {
+        if( !localStorage.getItem('firstLoad') ) {
+            localStorage['firstLoad'] = true;
+            window.location.reload();
+        }  
+        else {
+        localStorage.removeItem('firstLoad');
+        }
+    }
+    
 </script>
 
 {% endblock scripts %}
