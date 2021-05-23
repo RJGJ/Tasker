@@ -1,8 +1,9 @@
-Django==3.2
-django-allauth==0.44.0
-django-cleanup==5.2.0
-python-decouple==3.4
-pillow==8.2.0
-six==1.16.0
-django-admin-generator==2.2.1
-django-filter==2.4.0
+Django
+django-allauth
+django-cleanup
+python-decouple
+pillow
+six
+django-admin-generator
+django-filter
+django-cors-headers
