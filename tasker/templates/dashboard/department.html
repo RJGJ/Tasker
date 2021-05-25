@@ -88,8 +88,10 @@
                                     {% if task.state == 'TODO' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row justify-content-between">
+                                                <div class="d-flex flex-row justify-content-between" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    
                                                     <h5 class="card-title">{{ task }}</h5>
+                                                    
                                                     {% if user == task.assignee or user in department.head.all %}
                                                         <div class="dropdown">
                                                             <button class="btn rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -104,25 +106,27 @@
                                                         </div>
                                                     {% endif %}
                                                 </div>
-                                                <p class="text-muted">
-                                                    <span>By:
-                                                        {% if task.creator.first_name and task.creator.last_name %}
-                                                            {{ task.creator.first_name }} {{ task.creator.last_name }}
-                                                        {% else %}
-                                                            {{ task.creator }}
-                                                        {% endif %}
-                                                    </span><br>
-                                                    <span>For:
-                                                        {% if task.assignee.first_name and task.assignee.last_name %}
-                                                            {{ task.assignee.first_name }} {{ task.assignee.last_name }}
-                                                        {% else %}
-                                                            {{ task.assignee }}
-                                                        {% endif %}
-                                                    </span><br>
-                                                    <span>Created on: {{ task.created_on }}</span><br>
-                                                    <span>Target Date: {{ task.due_on }}</span>
-                                                </p>
-                                                <p class="card-text text-wrap">{{ task.description }}</p>
+                                                <div class="collapse" id="collapseTask{{ task.id }}">
+                                                    <p class="text-muted">
+                                                        <span>By:
+                                                            {% if task.creator.first_name and task.creator.last_name %}
+                                                                {{ task.creator.first_name }} {{ task.creator.last_name }}
+                                                            {% else %}
+                                                                {{ task.creator }}
+                                                            {% endif %}
+                                                        </span><br>
+                                                        <span>For:
+                                                            {% if task.assignee.first_name and task.assignee.last_name %}
+                                                                {{ task.assignee.first_name }} {{ task.assignee.last_name }}
+                                                            {% else %}
+                                                                {{ task.assignee }}
+                                                            {% endif %}
+                                                        </span><br>
+                                                        <span>Created on: {{ task.created_on }}</span><br>
+                                                        <span>Target Date: {{ task.due_on }}</span>
+                                                    </p>
+                                                    <p class="card-text text-wrap">{{ task.description }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     {% endif %}
@@ -138,8 +142,10 @@
                                     {% if task.state == 'DOING' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row justify-content-between">
+                                                <div class="d-flex flex-row justify-content-between" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    
                                                     <h5 class="card-title">{{ task }}</h5>
+                                                    
                                                     {% if user == task.assignee or user in department.head.all %}
                                                         <div class="dropdown">
                                                             <button class="btn rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -154,25 +160,27 @@
                                                         </div>
                                                     {% endif %}
                                                 </div>
-                                                <p class="text-muted">
-                                                    <span>By:
-                                                        {% if task.creator.first_name and task.creator.last_name %}
-                                                            {{ task.creator.first_name }} {{ task.creator.last_name }}
-                                                        {% else %}
-                                                            {{ task.creator }}
-                                                        {% endif %}
-                                                    </span><br>
-                                                    <span>For:
-                                                        {% if task.assignee.first_name and task.assignee.last_name %}
-                                                            {{ task.assignee.first_name }} {{ task.assignee.last_name }}
-                                                        {% else %}
-                                                            {{ task.assignee }}
-                                                        {% endif %}
-                                                    </span><br>
-                                                    <span>Created on: {{ task.created_on }}</span><br>
-                                                    <span>Target Date: {{ task.due_on }}</span>
-                                                </p>
-                                                <p class="card-text text-wrap">{{ task.description }}</p>
+                                                <div class="collapse" id="collapseTask{{ task.id }}">
+                                                    <p class="text-muted">
+                                                        <span>By:
+                                                            {% if task.creator.first_name and task.creator.last_name %}
+                                                                {{ task.creator.first_name }} {{ task.creator.last_name }}
+                                                            {% else %}
+                                                                {{ task.creator }}
+                                                            {% endif %}
+                                                        </span><br>
+                                                        <span>For:
+                                                            {% if task.assignee.first_name and task.assignee.last_name %}
+                                                                {{ task.assignee.first_name }} {{ task.assignee.last_name }}
+                                                            {% else %}
+                                                                {{ task.assignee }}
+                                                            {% endif %}
+                                                        </span><br>
+                                                        <span>Created on: {{ task.created_on }}</span><br>
+                                                        <span>Target Date: {{ task.due_on }}</span>
+                                                    </p>
+                                                    <p class="card-text text-wrap">{{ task.description }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     {% endif %}
@@ -188,8 +196,10 @@
                                     {% if task.state == 'DONE' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row justify-content-between">
+                                                <div class="d-flex flex-row justify-content-between" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    
                                                     <h5 class="card-title">{{ task }}</h5>
+                                                    
                                                     {% if user == task.assignee or user in department.head.all %}
                                                         <div class="dropdown">
                                                             <button class="btn rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -204,25 +214,27 @@
                                                         </div>
                                                     {% endif %}
                                                 </div>
-                                                <p class="text-muted">
-                                                    <span>By:
-                                                        {% if task.creator.first_name and task.creator.last_name %}
-                                                            {{ task.creator.first_name }} {{ task.creator.last_name }}
-                                                        {% else %}
-                                                            {{ task.creator }}
-                                                        {% endif %}
-                                                    </span><br>
-                                                    <span>For:
-                                                        {% if task.assignee.first_name and task.assignee.last_name %}
-                                                            {{ task.assignee.first_name }} {{ task.assignee.last_name }}
-                                                        {% else %}
-                                                            {{ task.assignee }}
-                                                        {% endif %}
-                                                    </span><br>
-                                                    <span>Created on: {{ task.created_on }}</span><br>
-                                                    <span>Target Date: {{ task.due_on }}</span>
-                                                </p>
-                                                <p class="card-text text-wrap">{{ task.description }}</p>
+                                                <div class="collapse" id="collapseTask{{ task.id }}">
+                                                    <p class="text-muted">
+                                                        <span>By:
+                                                            {% if task.creator.first_name and task.creator.last_name %}
+                                                                {{ task.creator.first_name }} {{ task.creator.last_name }}
+                                                            {% else %}
+                                                                {{ task.creator }}
+                                                            {% endif %}
+                                                        </span><br>
+                                                        <span>For:
+                                                            {% if task.assignee.first_name and task.assignee.last_name %}
+                                                                {{ task.assignee.first_name }} {{ task.assignee.last_name }}
+                                                            {% else %}
+                                                                {{ task.assignee }}
+                                                            {% endif %}
+                                                        </span><br>
+                                                        <span>Created on: {{ task.created_on }}</span><br>
+                                                        <span>Target Date: {{ task.due_on }}</span>
+                                                    </p>
+                                                    <p class="card-text text-wrap">{{ task.description }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     {% endif %}
