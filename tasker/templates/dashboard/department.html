@@ -15,7 +15,7 @@
                 </div>
                 <hr>
                 <div>
-                    <p><strong>head:</strong></p>
+                    <h3><strong>Head(s):</strong></h3>
                     <div class="d-flex flex-wrap">
                         {% for head in department.head.all %}
                             <div class="d-flex flex-column align-items-center p-1">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div>
-                    <p><strong>members:</strong></p>
+                    <h3><strong>Members:</strong></h3>
                     <div class="d-flex flex-wrap">
                         {% for member in department.members.all %}
                             <div class="d-flex flex-column align-items-center p-1">
@@ -74,7 +74,7 @@
                 {% include 'dashboard/calendar.html' %}
                 <hr>
                 <div>
-                    <p><strong>tasks</strong></p>
+                    <h3><strong>Tasks:</strong></h3>
                     <a href="{% url 'task' department.id %}" class="btn btn-primary rounded m-1">
                         Add new task 
                         <i class="fas fa-plus"></i>
@@ -82,7 +82,7 @@
                     <div class="row my-2">
                         <div class="col-12 col-md-4">
                             <div class="container my-1 p-2 border border-primary rounded">
-                                <strong>Todo:</strong>
+                                <strong>To do:</strong>
 
                                 {% for task in tasks %}
                                     {% if task.state == 'TODO' %}
@@ -96,7 +96,7 @@
                                                                 
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">Doing</a>
+                                                                <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">In Progress</a>
                                                                 <a class="dropdown-item" href="{% url 'change_state' 2 task.id %}">Done</a>
                                                             </div>
                                                         </div>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="container my-1 p-2 border border-secondary rounded">
-                                <strong>Doing:</strong>
+                                <strong>In progress:</strong>
 
                                 {% for task in tasks %}
                                     {% if task.state == 'DOING' %}
@@ -144,7 +144,7 @@
                                                                 
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">Todo</a>
+                                                                <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">To do</a>
                                                                 <a class="dropdown-item" href="{% url 'change_state' 2 task.id %}">Done</a>
                                                             </div>
                                                         </div>
@@ -192,8 +192,8 @@
                                                                 
                                                             </button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">Todo</a>
-                                                                <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">Doing</a>
+                                                                <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">To do</a>
+                                                                <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">In Progress</a>
                                                             </div>
                                                         </div>
                                                     {% endif %}
