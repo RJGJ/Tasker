@@ -40,12 +40,14 @@ class TaskForm(ModelForm):
         fields = [
             'name',
             'description',
-            'state',
             'due_on',
             'assignee',
         ]
         widgets = {
             'due_on': DateInput(attrs={'type': 'date'})
+        }
+        labels = {
+            'due_on': ('Target Date:'),
         }
 
 
