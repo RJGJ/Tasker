@@ -98,6 +98,8 @@
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                 <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">In Progress</a>
                                                                 <a class="dropdown-item" href="{% url 'change_state' 2 task.id %}">Done</a>
+                                                                <hr>
+                                                                <a href="{% url 'task' department.id task.id %}" class="dropdown-item">Edit Task</a>
                                                             </div>
                                                         </div>
                                                     {% endif %}
@@ -146,6 +148,8 @@
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                 <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">To do</a>
                                                                 <a class="dropdown-item" href="{% url 'change_state' 2 task.id %}">Done</a>
+                                                                <hr>
+                                                                <a href="{% url 'task' department.id task.id %}" class="dropdown-item">Edit Task</a>
                                                             </div>
                                                         </div>
                                                     {% endif %}
@@ -194,6 +198,8 @@
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                 <a class="dropdown-item" href="{% url 'change_state' 0 task.id %}">To do</a>
                                                                 <a class="dropdown-item" href="{% url 'change_state' 1 task.id %}">In Progress</a>
+                                                                <hr>
+                                                                <a href="{% url 'task' department.id task.id %}" class="dropdown-item">Edit Task</a>
                                                             </div>
                                                         </div>
                                                     {% endif %}
