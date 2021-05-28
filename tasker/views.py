@@ -67,18 +67,19 @@ def department(request, dept_id):
 @login_required
 def task(request, dept_id, task_id=None):
     dept = Department.objects.get(id=dept_id)
-    form = TaskForm()
-    task = None
+    task = Task.objects.get(id=task_id) if not task_id == None else None
+    form = TaskForm(instance=task)
     errors: ErrorDict = ErrorDict()
 
-    if not task_id == None:
-        task = Task.objects.get(id=task_id)
-        form = TaskForm(instance=task)
-
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        if not task_id == None:
+            task = Task.objects.get(id=task_id)
+            form = TaskForm(request.POST or None, instance=task)
+        else:
+            form = TaskForm(request.POST)
+
         if form.is_valid():
-            obj = form.save()
+            obj = form.save(commit=False)
             obj.department.add(dept)
             obj.creator = request.user
             obj.save()

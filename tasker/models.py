@@ -64,7 +64,7 @@ class Task(models.Model):
     created_on = models.DateField(auto_now=True, null=False)
     due_on = models.DateField(null=True, default=None)
     department = models.ManyToManyField(Department)
-    state = models.CharField(max_length=16, choices=choices, default=None, null=False)
+    state = models.CharField(max_length=16, choices=choices, default='TODO', null=False)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     assignee = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, blank=True, null=True)
 
