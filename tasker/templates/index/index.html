@@ -13,20 +13,32 @@
 {% include 'header.html' %}
 
 
-<div id="hero" style="height:80vh;" class="d-flex justify-content-center align-items-center text-light">
-	<div class="d-flex">
+<div id="hero" style="height:80vh;" class="row d-flex justify-content-center align-items-center text-light">
+	<div class="col-12 d-flex">
 		<div class="d-flex align-items-center bg-secondary rounded p-4 animate__animated animate__fadeInDown">
 			<p class="h1 text-right text-dark">
 				<strong><strong>TASKER: </strong>WEB-BASED TEAM TASK MANAGER</strong>
 			</p>
 		</div>
-		<div class="container text-dark">
+		<div class="text-dark">
 			<div class="card text-center p-4 rounded animate__animated animate__fadeInUp">
 				<a href="{% url 'account_login' %}" class="btn btn-primary btn-lg btn-block rounded">Log In</a>
 				<p class="pt-3">or</p>
 				<a href="{% url 'account_signup' %}" class="btn btn-secondary btn-lg btn-block rounded">Register</a>
 			</div>
 		</div>
+		{% comment %} <div class="container d-flex">
+			<div class=" m-1 text-end animate__animated animate__fadeInDown bg-secondary p-1 rounded">
+				<h1 class="text-dark">
+					<strong><strong>TASKER: </strong>WEB-BASED TEAM TASK MANAGER</strong>
+				</h1>
+			</div>
+			<div class="text-center m-1 text-dark bg-light px-4 py-2 d-grid gap-2 rounded animate__animated animate__fadeInUp">
+				<a href="{% url 'account_login' %}" class="btn btn-primary btn-lg btn-block rounded">Log In</a>
+				<p class="pt-3">or</p>
+				<a href="{% url 'account_signup' %}" class="btn btn-secondary btn-lg btn-block rounded">Register</a>
+			</div>
+		</div> {% endcomment %}
 	</div>
 </div>
 

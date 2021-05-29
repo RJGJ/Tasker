@@ -8,12 +8,13 @@
     <meta name="description" content="University of Perpetual Help-GMA Tasker" />
 	<meta name="keywords" content="web-based task manager,tasker,task manager,web tasker" />
 	<meta name="author" content="Rholex Dizon, RJ Jaictin, Aaron Patungcal" />
-    <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
     <link rel="stylesheet" href="{% static 'css/my-bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
     {% block styles %}{% endblock styles %}
+    <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
     {% block content %}{% endblock content %}

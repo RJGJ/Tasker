@@ -1,57 +1,16 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/header.css' %}">
-
-{% comment %} <div class="row bg-primary p-2">
-    <div class="col-2 d-flex align-items-center mx-auto p-0">
-        <img id="logo" class="d-block" src="{% static 'images/logo.png' %}" alt="School Logo">
+<div class="row bg-primary" id="header-component">
+    <div class="col-2 d-flex justify-content-center align-items-center p-2">
+        <img class="perp-logo img-fluid" src="{% static 'images/logo.png' %}" alt="School Logo">
     </div>
-    <div class="col text-center">
-        <div class="container text-light m-auto d-md-none text-center">
-            <h4>UPHS</h4>
-        </div>
-        <div class="container mx-auto text-light d-none d-md-block">
-            <h3>UNIVERSITY OF PERPETUAL HELP SYSTEM GMA</h3>
-            <p>
-                San Gabriel, General Mariano Alvarez (GMA), Cavite <br>
-                Contact: (0909) 809 - 4200 / (046) 460 - 4086 • (02) <br>
-                email: guidance@gma.uphsl.edu.ph / marketing@gma.uphsl.edu.ph <br>
-                website: <a class="badge" href="http://www.uphsl.edu.ph">www.uphsl.edu.ph</a>
-            </p>
+    <div class="col">
+        <div class="text-light text-center py-auto d-flex justify-content-center" style="min-height:100%;">
+            <h4 class="align-self-center">UNIVERSITY OF PERPETUAL HELP SYSTEM GMA</h4>
         </div>
     </div>
-    <div class="col-2 mx-auto"><!-- spacer --></div>
-</div> {% endcomment %}
-
-<div class="row bg-primary p-2">
-    <div class="col-2 col-md">
-        <div class="container">
-            <img id="logo" class="d-block" src="{% static 'images/logo.png' %}" alt="School Logo">
-        </div>
+    <div class="col-2 d-flex justify-content-center align-items-center p-2">
+        <img class="perp-logo img-fluid" src="{% static 'images/uphsl-eng-logo.png' %}" alt="School Logo">
     </div>
-    <div class="col-8 col-md">
-        <div class="container text-light m-auto d-md-none text-center">
-            <h4>UNIVERSITY OF PERPETUAL HELP SYSTEM GMA</h4>
-        </div>
-        <div class="container mx-auto text-light d-none d-md-block text-center">
-            <h3>UNIVERSITY OF PERPETUAL HELP SYSTEM GMA</h3>
-            {% comment %} <p>
-                San Gabriel, General Mariano Alvarez (GMA), Cavite <br>
-                Contact: (0909) 809 - 4200 / (046) 460 - 4086 • (02) <br>
-                email: guidance@gma.uphsl.edu.ph / marketing@gma.uphsl.edu.ph <br>
-                website: <a class="badge" href="http://www.uphsl.edu.ph">www.uphsl.edu.ph</a>
-            </p> {% endcomment %}
-        </div>
-    </div>
-    <div class="col-2 col-md"></div>
 </div>
 
 <div class="row bg-secondary py-1"></div>
-
-{% comment %} {% include 'side-nav.html' %} {% endcomment %}
-
-{% comment %} <div class="row bg-secondary text-center" id="navbar">
-    <button onclick="window.location.href='{% url 'index' %}'" class="col btn btn-secondary align-middle">TASKER</button>
-    <button onclick="window.location.href='{% url 'account_logout' %}'" class="col btn btn-secondary align-middle">LOG OUT</button>
-    <button onclick="window.location.href='{% url 'dashboard' %}'" class="col btn btn-secondary align-middle">DASHBOARD</button>
-    <button onclick="window.location.href='{% url 'account_settings' %}'" class="col btn btn-secondary align-middle">ACCOUNT SETTINGS</button>
-</div> {% endcomment %}
