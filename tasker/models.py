@@ -17,7 +17,7 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         if bool(self.image) == True:
             self._process_img()
-        
+
         super().save(*args, **kwargs)
 
     def _make_square(self, img):
@@ -28,7 +28,7 @@ class User(AbstractUser):
         new_im = Image.new('RGB', (size, size), fill_color)
         new_im.paste(img, (int((size - x) / 2), int((size - y) / 2)))
         return new_im
-    
+
     def _process_img(self):
         pil_img = Image.open(self.image)
         pil_img = self._make_square(pil_img)
@@ -54,9 +54,9 @@ class Department(models.Model):
 class Task(models.Model):
 
     choices = [
-        ('TODO',  'todo'),
-        ('DOING',  'doing'),
-        ('DONE',  'done'),
+        ('TODO',  'To do'),
+        ('DOING',  'In Progress'),
+        ('DONE',  'Done'),
     ]
 
     name = models.CharField(max_length=255, unique=True)
@@ -64,9 +64,11 @@ class Task(models.Model):
     created_on = models.DateField(auto_now=True, null=False)
     due_on = models.DateField(null=True, default=None)
     department = models.ManyToManyField(Department)
-    state = models.CharField(max_length=16, choices=choices, default='TODO', null=False)
+    state = models.CharField(
+        max_length=16, choices=choices, default='TODO', null=False)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    assignee = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, blank=True, null=True)
+    assignee = models.ForeignKey(
+        User, related_name='+', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -74,8 +76,10 @@ class Task(models.Model):
 
 class DepartmentFile(models.Model):
     file = models.FileField()
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
-    uploader = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, blank=True, null=True)
+    uploader = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
     upload_date = models.DateField(auto_now=True)
     description = models.CharField(max_length=255)
 
