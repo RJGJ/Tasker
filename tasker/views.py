@@ -75,11 +75,12 @@ def task(request, dept_id, task_id=None):
         if not task_id == None:
             task = Task.objects.get(id=task_id)
             form = TaskForm(request.POST or None, instance=task)
+
         else:
             form = TaskForm(request.POST)
 
         if form.is_valid():
-            obj = form.save(commit=False)
+            obj = form.save() if form == None else form.save(commit=False)
             obj.department.add(dept)
             obj.creator = request.user
             obj.save()
@@ -88,6 +89,7 @@ def task(request, dept_id, task_id=None):
 
         else:
             errors = form.errors
+
     context = {
         'form': form,
         'task': task,

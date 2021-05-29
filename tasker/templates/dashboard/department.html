@@ -88,9 +88,9 @@
                                     {% if task.state == 'TODO' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row justify-content-between" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <div class="d-flex flex-row justify-content-between">
                                                     
-                                                    <h5 class="card-title">{{ task }}</h5>
+                                                    <h5 class="card-title" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ task }}</h5>
                                                     
                                                     {% if user == task.assignee or user in department.head.all %}
                                                         <div class="dropdown">
@@ -142,9 +142,9 @@
                                     {% if task.state == 'DOING' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row justify-content-between" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <div class="d-flex flex-row justify-content-between">
                                                     
-                                                    <h5 class="card-title">{{ task }}</h5>
+                                                    <h5 class="card-title" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ task }}</h5>
                                                     
                                                     {% if user == task.assignee or user in department.head.all %}
                                                         <div class="dropdown">
@@ -196,9 +196,9 @@
                                     {% if task.state == 'DONE' %}
                                         <div class="card my-1 rounded">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row justify-content-between" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <div class="d-flex flex-row justify-content-between">
                                                     
-                                                    <h5 class="card-title">{{ task }}</h5>
+                                                    <h5 class="card-title" data-bs-toggle="collapse" href="#collapseTask{{ task.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ task }}</h5>
                                                     
                                                     {% if user == task.assignee or user in department.head.all %}
                                                         <div class="dropdown">
