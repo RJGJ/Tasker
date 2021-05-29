@@ -1,0 +1,17 @@
+.user-img {
+  max-width: 5rem;
+  max-height: 5rem;
+}
+
+.member-img {
+  max-width: 3rem;
+  max-height: 3rem;
+}
+
+.perp-logo {
+  max-height: 64px;
+}
+
+#header-component > img#perp-logo {
+  max-height: 64px;
+}

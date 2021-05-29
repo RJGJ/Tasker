@@ -80,7 +80,7 @@ def task(request, dept_id, task_id=None):
             form = TaskForm(request.POST)
 
         if form.is_valid():
-            obj = form.save() if form == None else form.save(commit=False)
+            obj = form.save() if task_id == None else form.save(commit=False)
             obj.department.add(dept)
             obj.creator = request.user
             obj.save()
