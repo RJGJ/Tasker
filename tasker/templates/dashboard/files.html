@@ -8,6 +8,15 @@
                     <div class="border border-primary rounded p-2 my-1">
                         <div class="text-truncate text-muted">
                             <a href="{{ file.file.url }}">{{ file }}</a><br>
+                            <span>
+                                Task:
+                                {% if file.task %}
+                                    {{ file.task }}
+                                {% else %}
+                                    None
+                                {% endif %}
+                            </span><br>
+                            <span></span>
                             <span>uploader: {{ file.uploader }}</span><br>
                             <span>upload date: {{ file.upload_date }}</span>
                         </div>

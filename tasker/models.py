@@ -78,6 +78,8 @@ class DepartmentFile(models.Model):
     file = models.FileField()
     department = models.ForeignKey(
         Department, on_delete=models.CASCADE, blank=True, null=True)
+    task = models.ForeignKey(
+        Task, on_delete=models.CASCADE, blank=True, null=True)
     uploader = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True)
     upload_date = models.DateField(auto_now=True)
