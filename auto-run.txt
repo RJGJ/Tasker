@@ -1,0 +1,5 @@
+# make a cron job
+sudo crontab -e
+
+# add this command at the end
+@reboot /path/to/.venv/bin/python /path/to/manage.py startserver 0.0.0.0:8000 &
